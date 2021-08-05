@@ -1,7 +1,7 @@
 # UMI
 
 ## Requirements
-1. Python3
+1. Python3 & pip3
 2. Elasticsearch v7.14.0
 
 ## Installation
