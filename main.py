@@ -9,7 +9,7 @@ def connect_elasticsearch():
     es = None
     es = Elasticsearch(endpoint)
     if es.ping():
-        print('Yay Connect')
+        print('Yay! Connected to ElasticSearch')
     else:
         print('Awww it could not connect!')
         raise ValueError("Connection failed")
@@ -26,9 +26,9 @@ def fetch_commits_and_index():
         data = {
             "date": commit_info.commit.author.date,
             "message": commit_info.commit.message,
-            "username": commit_info.author.login,
+            "username": getattr(commit_info.author, 'login', commit_info.commit.author.name),
             "committer": {
-                "account_created": commit_info.author.created_at
+                "account_created": getattr(commit_info.author, 'created_at', '1970-01-01T00:00:00')
             }
         }
 
